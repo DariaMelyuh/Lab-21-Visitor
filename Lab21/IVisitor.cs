@@ -1,11 +1,7 @@
 ﻿namespace Lab21
 {
-    public interface IVisitor
+    public abstract class Visitor
     {
-        void Visit(Menu menu);
-        void Visit(Section section);
-        void Visit(MenuItem menuItem);
-        void Visit(Dish dish);
-        object GetResult();
+        public abstract  void Visit(IComponent component);
     }
 }

@@ -1,35 +1,15 @@
 ﻿namespace Lab21
 {
-    public class CountSectionVisitor : IVisitor
+    public class CountSectionVisitor : Visitor
     {
         public int SectionCount { get; private set; }
 
-        public void Visit(Menu menu)
+        public override void Visit(IComponent component)
         {
-            SectionCount++;
-            foreach (var component in menu.GetComponents())
+            if (component is Section section)
             {
-                component.Accept(this);
+                SectionCount++;
             }
-        }
-
-        public void Visit(Section section)
-        {
-            SectionCount++;
-            foreach (var component in section.GetComponents())
-            {
-                component.Accept(this);
-            }
-        }
-
-        public void Visit(MenuItem menuItem)
-        {
-            
-        }
-
-        public void Visit(Dish dish)
-        {
-            
         }
 
         public object GetResult()

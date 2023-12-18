@@ -2,11 +2,15 @@
 {
     public class Section : IComponent
     {
-        private List<IComponent> _components = new List<IComponent>();
         private string _name;
 
         public Section(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name), "Недопустимое значение для имени блюда");
+            }
+
             _name = name;
         }
 
@@ -45,26 +49,9 @@
             _components.Remove(component);
         }
 
-        public override void Accept(IVisitor visitor)
+        public override void Accept(Visitor visitor)
         {
-            foreach (var component in _components)
-            {
-                component.Accept(visitor);
-            }
-        }
-
-        public IEnumerable<IComponent> GetComponents()
-        {
-            return _components;
-        }
-
-        public int VeganCount
-        {
-            get
-            {
-                return _components.Count(component => component is MenuItem menuItem && menuItem.IsVegan);
-            }
+            visitor.Visit(this);
         }
     }
-
 }

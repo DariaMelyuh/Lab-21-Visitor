@@ -32,7 +32,7 @@
             throw new InvalidOperationException("Нельзя удалить из блюда");
         }
 
-        public override void Accept(IVisitor visitor)
+        public override void Accept(Visitor visitor)
         {
             visitor.Visit(this);
         }

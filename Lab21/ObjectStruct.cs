@@ -13,9 +13,26 @@
             _root = root;
         }
 
-        public void Accept(IVisitor visitor)
+        public void Accept(Visitor visitor)
         {
-            _root.Accept(visitor);
+            List<IComponent> components = new List<IComponent>();
+            IComponent root = _root;
+
+            while (root != null || components.Count > 0)
+            {
+                while (root != null)
+                {
+                    components.Add(root);
+                    root = root.IsNext() ? root.Next() : null;
+                }
+
+                int lastIndex = components.Count - 1;
+                root = components[lastIndex];
+                components.RemoveAt(lastIndex);
+
+                root.Accept(visitor);
+                root = root.IsNext() ? root.Next() : null;
+            }
         }
     }
 }

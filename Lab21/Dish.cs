@@ -31,7 +31,7 @@
             throw new InvalidOperationException("Блюдо не изменяется");
         }
 
-        public override void Accept(IVisitor visitor)
+        public override void Accept(Visitor visitor)
         {
             visitor.Visit(this);
         }
